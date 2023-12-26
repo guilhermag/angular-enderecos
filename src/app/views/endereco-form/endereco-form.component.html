@@ -1,0 +1,98 @@
+<section class="d-flex justify-content-center pt-2 pb-4">
+  <form
+    #formComp="ngForm"
+    [formGroup]="form"
+    (ngSubmit)="submeterForm()"
+    class="d-flex flex-column w-95"
+  >
+    <div class="row">
+      <span class="cep-mensagem">{{ cepMensagem }}</span>
+      <mat-form-field appearance="outline" class="col-sm-2 mb-3 mt-3">
+        <mat-label>CEP</mat-label>
+        <input
+          matInput
+          formControlName="cep"
+          placeholder="Ex: Avenida central"
+          mask="00.000-000"
+          placeholder="00.000-000"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-4 mb-3 mt-3">
+        <mat-label>Logradouro</mat-label>
+        <input
+          matInput
+          formControlName="logradouro"
+          placeholder="Ex: Avenida central"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-2 mb-3 mt-3">
+        <mat-label>Número</mat-label>
+        <input matInput formControlName="numero" placeholder="Ex: 557" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-4 mb-3 mt-3">
+        <mat-label>Complemento</mat-label>
+        <input
+          matInput
+          formControlName="complemento"
+          placeholder="Ex: Esquina"
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-sm-4 mb-3">
+        <mat-label>Bairro</mat-label>
+        <input matInput formControlName="bairro" placeholder="Ex: Centro" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-4 mb-3">
+        <mat-label>Cidade</mat-label>
+        <input matInput formControlName="localidade" placeholder="Ex: Toledo" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-4 mb-3">
+        <mat-label>Estado</mat-label>
+        <mat-select
+          (selectionChange)="selecionarEstado($event)"
+          formControlName="uf"
+        >
+          <mat-option
+            *ngFor="let estado of estados$ | async as list"
+            [value]="estado.sigla"
+          >
+            {{ estado.nome }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row px-4">
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        class="col-4"
+        [disabled]="form.invalid || !form.dirty"
+      >
+        {{ botaoSubmeter | titlecase }}
+      </button>
+      <div class="col-4"></div>
+      <button
+        mat-raised-button
+        color="warn"
+        class="col-4"
+        [disabled]="!form.dirty"
+        (click)="limparFormulario()"
+      >
+        {{ "cancelar" | titlecase }}
+      </button>
+    </div>
+  </form>
+</section>
+<tabela-pesquisas
+  [enderecos$]="enderecosCadastrados$"
+  [editavel]="true"
+  (editarEndereco)="editarEndereco($event)"
+></tabela-pesquisas>

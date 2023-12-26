@@ -9,10 +9,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from './material/material.module';
+import { EnderecoFormComponent } from './views/endereco-form/endereco-form.component';
+import { TabelaPesquisasComponent } from './views/tabela-pesquisas/tabela-pesquisas.component';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, EnderecoFormComponent, TabelaPesquisasComponent, ModalComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

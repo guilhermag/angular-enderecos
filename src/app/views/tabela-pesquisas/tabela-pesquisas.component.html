@@ -1,0 +1,68 @@
+<section class="d-flex justify-content-center pt-4">
+  <div
+    *ngIf="(enderecos$ | async).length > 0; else pesquisasNaoRealizadas"
+    class="w-95"
+  >
+    <table mat-table [dataSource]="dadosEnderecos" class="mat-elevation-z8">
+      <ng-container [matColumnDef]="coluna" *ngFor="let coluna of colunas">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ coluna === "horarioPesquisa" ? "Horário" : (coluna | titlecase) }}
+        </th>
+        <td mat-cell *matCellDef="let endereco">
+          <div *ngIf="coluna !== 'acao'">
+            {{ endereco[coluna] }}
+          </div>
+          <div *ngIf="coluna === 'acao'">
+            <button mat-icon-button (click)="editar(endereco)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="excluir(endereco)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="colunasTabela"></tr>
+      <tr mat-row *matRowDef="let row; columns: colunasTabela"></tr>
+    </table>
+
+    <!-- <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Cep</th>
+          <th scope="col">Logradouro</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Horario</th>
+          <th scope="col" *ngIf="editavel">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let endereco of enderecos$ | async as list">
+          <td>{{ endereco.id }}</td>
+          <td>{{ endereco.cep }}</td>
+          <td>{{ endereco.logradouro }}</td>
+          <td>{{ endereco.bairro }}</td>
+          <td>{{ endereco.localidade }}</td>
+          <td>{{ endereco.uf }}</td>
+          <td>{{ endereco.horarioPesquisa }}</td>
+          <td *ngIf="editavel">
+            <button mat-icon-button>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+  </div>
+</section>
+
+<ng-template #pesquisasNaoRealizadas>
+  Nenhum CEP foi pesquisado até o momento.
+</ng-template>

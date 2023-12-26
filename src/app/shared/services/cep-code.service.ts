@@ -39,6 +39,7 @@ export class CepCodeService {
       cep: res.cep,
       logradouro: res.logradouro,
       bairro: res.bairro,
+      numero: '',
       complemento: res.complemento,
       localidade: res.localidade,
       uf: res.uf,

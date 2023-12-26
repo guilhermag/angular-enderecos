@@ -1,113 +1,13 @@
-<div class="container d-flex">
+<div class="d-flex flex-column">
   <mat-tab-group>
-    <mat-tab label="Cadastrar Endereço">
-      <form
-        [formGroup]="form"
-        (ngSubmit)="submitForm()"
-        class="d-flex flex-column form-container"
-      >
-        <div class="row">
-          <mat-form-field appearance="outline" class="col-sm-2 mb-3 mt-3">
-            <mat-label>CEP</mat-label>
-            <input
-              matInput
-              formControlName="cep"
-              placeholder="Ex: Avenida central"
-              mask="00.000-000"
-              placeholder="00.000-000"
-            />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="col-sm-4 mb-3 mt-3">
-            <mat-label>Logradouro</mat-label>
-            <input
-              matInput
-              formControlName="logradouro"
-              placeholder="Ex: Avenida central"
-            />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="col-sm-2 mb-3 mt-3">
-            <mat-label>Número</mat-label>
-            <input matInput formControlName="numero" placeholder="Ex: 557" />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="col-sm-4 mb-3 mt-3">
-            <mat-label>Complemento</mat-label>
-            <input
-              matInput
-              formControlName="complemento"
-              placeholder="Ex: Esquina"
-            />
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <mat-form-field appearance="outline" class="col-sm-4 mb-3">
-            <mat-label>Bairro</mat-label>
-            <input matInput formControlName="bairro" placeholder="Ex: Centro" />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="col-sm-4 mb-3">
-            <mat-label>Cidade</mat-label>
-            <input
-              matInput
-              formControlName="localidade"
-              placeholder="Ex: Toledo"
-            />
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="col-sm-4 mb-3">
-            <mat-label>Estado</mat-label>
-            <mat-select
-              (selectionChange)="selecionarEstado($event)"
-              formControlName="uf"
-            >
-              <mat-option
-                *ngFor="let estado of estados$ | async as list"
-                [value]="estado.sigla"
-              >
-                {{ estado.nome }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <button
-          type="submit"
-          class="btn btn-primary w-50"
-          [disabled]="form.invalid"
-        >
-          Cadastrar
-        </button>
-      </form>
+    <mat-tab label="Cadastrar endereço">
+      <endereco-form></endereco-form>
     </mat-tab>
-    <mat-tab label="Lista de Endereços"> Content 2 </mat-tab>
+    <mat-tab label="Histórico de CEPs válidos pesquisados">
+      <tabela-pesquisas
+        [enderecos$]="enderecosPesquisados$"
+        [editavel]="false"
+      ></tabela-pesquisas>
+    </mat-tab>
   </mat-tab-group>
-
-  <div *ngIf="enderecoInfo.length > 0">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Cep</th>
-          <th scope="col">Logradouro</th>
-          <th scope="col">Bairro</th>
-          <th scope="col">Cidade</th>
-          <th scope="col">Estado</th>
-          <th scope="col">Horario</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let endereco of enderecoInfo; let i = index">
-          <th scope="row">{{ i + 1 }}</th>
-          <td>{{ endereco.cep }}</td>
-          <td>{{ endereco.logradouro }}</td>
-          <td>{{ endereco.bairro }}</td>
-          <td>{{ endereco.localidade }}</td>
-          <td>{{ endereco.uf }}</td>
-          <td>{{ buscas[i] }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </div>
