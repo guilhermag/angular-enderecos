@@ -11,7 +11,7 @@ import {
 } from 'rxjs';
 
 import { MatSelectChange } from '@angular/material/select';
-import { CepCodeService } from 'src/app/shared/services/cep-code.service';
+import { CepService } from 'src/app/shared/services/cep.service';
 import { EnderecoService } from 'src/app/shared/services/endereco.service';
 import { EnderecoInfo } from 'src/app/shared/model/endereco';
 
@@ -21,7 +21,7 @@ import { EnderecoInfo } from 'src/app/shared/model/endereco';
   styleUrls: ['./endereco-form.component.scss'],
 })
 export class EnderecoFormComponent implements OnInit {
-  cepService = inject(CepCodeService);
+  cepService = inject(CepService);
   enderecoService = inject(EnderecoService);
   @ViewChild('formComp') formComponente: NgForm;
 

@@ -7,7 +7,7 @@ import { IBGE_UF_URL, VIACEP_URL } from 'src/environments';
 @Injectable({
   providedIn: 'root',
 })
-export class CepCodeService {
+export class CepService {
   http = inject(HttpClient);
 
   readonly viaCepURL = VIACEP_URL;
