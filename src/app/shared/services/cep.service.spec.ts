@@ -18,6 +18,7 @@ import { deepClone } from '../utils/utils';
 describe('CepService', () => {
   let servico: CepService;
   let httpTestingController: HttpTestingController;
+  let cep = deepClone(cepMock);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -32,12 +33,12 @@ describe('CepService', () => {
   });
 
   it('deve retornar os dados do cep', () => {
-    const cep = '86709240';
-    servico.getCep(cep).subscribe((res) => {
-      expect(res).toEqual(cepMock);
+    const numeroCep = '86709240';
+    servico.getCep(numeroCep).subscribe((res) => {
+      expect(res).toEqual(cep);
     });
     const request = httpTestingController.expectOne(
-      `${VIACEP_URL}${cep}/json/`
+      `${VIACEP_URL}${numeroCep}/json/`
     );
     expect(request.request.method).toEqual('GET');
     request.flush(cepResMock);
@@ -53,7 +54,7 @@ describe('CepService', () => {
   });
 
   it('deve mapear o endereco corretamente', () => {
-    expect(servico['mapResposta'](cepResMock)).toEqual(cepMock);
+    expect(servico['mapResposta'](cepResMock)).toEqual(cep);
     expect(servico['mapResposta']({ erro: 'erro' } as any)).toBeNull();
   });
 });

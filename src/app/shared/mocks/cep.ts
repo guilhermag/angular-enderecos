@@ -28,8 +28,8 @@ export const enderecoMock: EnderecoInfo = {
   cep: '86709-240',
   logradouro: 'Rua Mutumporanga',
   bairro: 'Conjunto Centauro',
-  numero: '',
-  complemento: '',
+  numero: '32',
+  complemento: 'esquina',
   localidade: 'Arapongas',
   uf: 'PR',
 };
